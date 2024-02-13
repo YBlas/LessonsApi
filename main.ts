@@ -11,9 +11,7 @@ app.get("/", (req: Request, res: Response): void => {
   const randomNumber = Math.floor(Math.random() * 191) + 1;
 
   const finalUrl = `${lessonUrl}${randomNumber}.png`;
-  res.send(
-    `<h1>Random Solar Opposites Lesson</h1><img src="${finalUrl}" alt="Random Solar Opposites Lesson" />`
-  );
+  res.send(finalUrl);
 });
 
 app.listen(3000, () => {
