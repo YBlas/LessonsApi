@@ -1,8 +1,6 @@
-//@deno-types="npm:@types/express@4"
+import { Router } from "express";
 
-import express, { Request, Response } from "npm:express";
-
-const app = express();
+const router = Router();
 
 const wisdomArray: string[] = [
   "1. Don’t count your chickens before they hatch.",
@@ -196,19 +194,8 @@ const wisdomArray: string[] = [
   "191. If it’s your turn to freestyle, don’t steal a verse you heard on the radio. Rap from the heart, yo.",
 ];
 
-app.get("/", (req: Request, res: Response): void => {
-  res.send(wisdomArray[Math.floor(Math.random() * wisdomArray.length)]);
+router.get("/", (req, res) => {
+  res.json({ wisdom: wisdomArray[Math.floor(Math.random() * wisdomArray.length)] });
 });
 
-app.get("/:number", (req: Request, res: Response): void => {
-  const number = req.params.number;
-  res.send(
-    number > wisdomArray.length || number <= 0
-      ? wisdomArray[0]
-      : wisdomArray[number - 1]
-  );
-});
-
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+export default router;
